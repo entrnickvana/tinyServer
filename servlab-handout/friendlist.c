@@ -7,6 +7,10 @@
  *   Tiny Web server
  *   Dave O'Hallaron
  *   Carnegie Mellon University
+
+    * Modified by Nick Elliott!!!
+
+
  */
 #include "csapp.h"
 #include "dictionary.h"
@@ -15,8 +19,7 @@
 static void doit(int fd);
 static dictionary_t *read_requesthdrs(rio_t *rp);
 static void read_postquery(rio_t *rp, dictionary_t *headers, dictionary_t *d);
-static void clienterror(int fd, char *cause, char *errnum, 
-                        char *shortmsg, char *longmsg);
+static void clienterror(int fd, char *cause, char *errnum, char *shortmsg, char *longmsg);
 static void print_stringdictionary(dictionary_t *d);
 static void serve_request(int fd, dictionary_t *query);
 
@@ -98,7 +101,15 @@ void doit(int fd)
       /* You'll want to handle different queries here,
          but the intial implementation always returns
          nothing: */
-      serve_request(fd, query);
+      //serve_request(fd, query);
+
+      if(starts_with("/friends", uri))          {if(1)printf("0\n"); /*serve_friends(fd, query);*/}
+      else if(starts_with("/befriend", uri))    {if(1)printf("1\n"); /*serve_befriend(fd, query);*/}
+      else if(starts_with("/unfriend", uri))    {if(1)printf("2\n"); /*serve_unfriend(fd, query);*/}
+      else if(starts_with("/introduce", uri))   {if(1)printf("3\n"); /*serve_introduce(fd, query);*/}
+      else if(starts_with("/sum", uri))         {if(1)printf("3\n"); /*serve_sum(fd, query);}     */ 
+      else                                      {if(1)printf("4\n"); /*serve_request(fd, query);*/}
+    }
 
       /* Clean up */
       free_dictionary(query);
